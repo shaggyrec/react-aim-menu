@@ -16,6 +16,10 @@
     "menu-aim"
   ],
   "author": "shaggyrec <i@shagg.ru>",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/shaggyrec/react-aim-menu.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^14.14.14",
