@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "parcel example/index.html",
+    "build": "parcel build src/index.tsx --out-dir lib",
     "test": "npm run lint",
     "lint": "eslint './**/*.tsx' './**/*.ts'"
   },
