@@ -4,6 +4,10 @@ React implementation of Amazon's jQuery-menu-aim.
 
 ![Build Status](https://travis-ci.org/shaggyrec/react-aim-menu.svg?branch=main)
 
+## Installation
+
+    npm i react-aim-menu
+
 ## Usage
 
     import React from 'react';
