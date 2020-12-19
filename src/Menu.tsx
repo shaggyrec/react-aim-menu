@@ -39,7 +39,7 @@ const MOUSE_HISTORY_SIZE = 3;
 
 export const MenuContext = createContext(defaultState);
 
-function Menu (props: { children: any, onMouseLeave: () => any, className?: string, hoverDelay?: number }): ReactElement {
+function Menu (props: { children: any, onMouseLeave?: () => any, className?: string, hoverDelay?: number }): ReactElement {
     const hoverDelay = props.hoverDelay || DEFAULT_HOVER_DELAY;
     const menuRef = useRef();
     const [expandedItem, setExpandedItem] = useState(null);
@@ -73,7 +73,7 @@ function Menu (props: { children: any, onMouseLeave: () => any, className?: stri
         }
     }
     function handleMenuLeave (): void {
-        props.onMouseLeave();
+        props.onMouseLeave && props.onMouseLeave();
         clearPendingExpand();
         setExpandedItem(null);
     }
