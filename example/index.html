@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>React aim menu</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .react-aim-menu {
+            width: 200px;
+            min-height: 100vh;
+            position: relative;
+        }
+        .react-aim-menu__item {
+            padding: 10px 15px;
+            border: solid #000;
+            border-width: 0 1px 1px 1px;
+        }
+        .react-aim-menu__item:first-child {
+            border-width: 1px;
+        }
+
+        .react-aim-menu__submenu {
+            display: none;
+            position: absolute;
+            left: 200px;
+            top: 0;
+            width: 300px;
+            height: 500px;
+            padding: 15px;
+            border: 1px solid #000;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0,0,0,.5);
+        }
+
+        .react-aim-menu__submenu--active {
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+<div id="react-aim-menu">Loading...</div>
+<script src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "mocha": true,
+        "node": true
+    },
+    "parser":  "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "extends":  [
+        "plugin:react/recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "arrowFunctions": true,
+            "blockBindings": true,
+            "defaultParams": true,
+            "modules": true,
+            "jsx": true
+        }
+    },
+    "rules": {
+        "no-undef": "off",
+        "object-curly-spacing": [1, "always"],
+        "indent": [1, 4, {
+            "SwitchCase": 1
+        }],
+        "quotes": [2, "single"],
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/explicit-function-return-type": ["warn", { "allowExpressions": true }],
+        "react/no-unescaped-entities": "off",
+        "allowSyntheticDefaultImports": "off",
+        "react/prop-types": "off"
+    },
+    "settings":  {
+        "react":  {
+            "version":  "detect"
+        }
+    }
+}
