@@ -15,7 +15,8 @@
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
         "allowJs": true,
-        "lib": ["es2016", "dom"]
+        "lib": ["es2016", "dom"],
+        "declaration": true
     },
     "include": [
         "./**/**.ts",
