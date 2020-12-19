@@ -2,7 +2,7 @@
 
 React implementation of Amazon's jQuery-menu-aim.
 
-[![Build Status](https://travis-ci.org/shaggyrec/react-aim-menu.svg?branch=main)
+![Build Status](https://travis-ci.org/shaggyrec/react-aim-menu.svg?branch=main)
 
 ## Usage
 
