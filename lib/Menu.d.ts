@@ -7,7 +7,7 @@ interface ContextState {
 export declare const MenuContext: React.Context<ContextState>;
 declare function Menu(props: {
     children: any;
-    onMouseLeave: () => any;
+    onMouseLeave?: () => any;
     className?: string;
     hoverDelay?: number;
 }): ReactElement;
