@@ -1,6 +1,6 @@
 {
   "name": "react-aim-menu",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A React version of Amazon's jQuery-menu-aim plugin",
   "main": "lib/index.js",
   "scripts": {
@@ -17,8 +17,8 @@
   ],
   "author": "shaggyrec <i@shagg.ru>",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/shaggyrec/react-aim-menu.git"
+    "type": "git",
+    "url": "https://github.com/shaggyrec/react-aim-menu.git"
   },
   "license": "MIT",
   "devDependencies": {
