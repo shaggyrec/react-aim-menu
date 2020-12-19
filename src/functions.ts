@@ -43,6 +43,7 @@ export const getTriangleZone = function(menuBox: any, point: { x: number, y: num
     if (direction === 'right') {
         const width = menuBox.topRight.x - menuBox.topLeft.x;
         const height = menuBox.bottomRight.y - menuBox.topRight.y;
+        console.log(Math.max(window.innerHeight + height, menuBox.bottomRight.y + height));
         return {
             A: {
                 x: point.x,
@@ -54,7 +55,7 @@ export const getTriangleZone = function(menuBox: any, point: { x: number, y: num
             },
             C: {
                 x: menuBox.bottomRight.x + width,
-                y: menuBox.bottomRight.y + height
+                y: Math.max(window.innerHeight + height, menuBox.bottomRight.y + height)
             },
         }
     } else if (direction === 'down') {
