@@ -16,11 +16,12 @@
         "allowSyntheticDefaultImports": true,
         "allowJs": true,
         "lib": ["es2016", "dom"],
-        "declaration": true
+        "declaration": true,
+        "outDir": "lib"
     },
     "include": [
-        "./**/**.ts",
-        "./**/**.tsx"
+        "src/**/**.ts",
+        "src/**/**.tsx"
     ],
     "exclude": [
         "node_modules"
