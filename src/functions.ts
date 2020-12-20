@@ -41,20 +41,18 @@ export const getRectangle = function(elem: Element) {
 
 export const getTriangleZone = function(menuBox: any, point: { x: number, y: number }, direction = 'right') {
     if (direction === 'right') {
-        const width = menuBox.topRight.x - menuBox.topLeft.x;
         const height = menuBox.bottomRight.y - menuBox.topRight.y;
-        console.log(Math.max(window.innerHeight + height, menuBox.bottomRight.y + height));
         return {
             A: {
                 x: point.x,
                 y: point.y
             },
             B: {
-                x: menuBox.topRight.x + width,
+                x: menuBox.topRight.x,
                 y: Math.min(0, menuBox.topRight.y - height)
             },
             C: {
-                x: menuBox.bottomRight.x + width,
+                x: menuBox.bottomRight.x,
                 y: Math.max(window.innerHeight + height, menuBox.bottomRight.y + height)
             },
         }
