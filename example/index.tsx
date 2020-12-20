@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { MenuItem, Menu } from '../src';
 
-const items = [0,1,2,3,4];
+const items = [0,1,2,3,4,5,6,7,8,9];
 
 function generateBg (): string {
     return '#' + Math.floor(Math.random()*16777215).toString(16);
@@ -29,7 +29,7 @@ function ExampleApp(): ReactElement {
 
     function renderMenuItems (): ReactElement[] {
         return items.map(i => (
-            <MenuItem key={i} onHover={() => setActiveElement(i)} className="react-aim-menu__item">
+            <MenuItem key={i} onHover={() => setActiveElement(i)} className={`react-aim-menu__item${active === i ? ' react-aim-menu__item--active' : ''}`}>
                 item{i}
             </MenuItem>
         ));
