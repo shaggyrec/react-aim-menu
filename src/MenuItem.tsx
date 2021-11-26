@@ -1,15 +1,24 @@
-import React, { ReactElement, useContext, useEffect, useState } from 'react';
+import React, { HTMLAttributes, ReactNode, Ref, useContext, useEffect, useState } from 'react';
 import { MenuContext } from './Menu';
 import { generateId } from './functions'
 
-function MenuItem(props: { children: any, className?: string, onHover?: () => any, onLeave?: () => any }): ReactElement {
+type MenuItemProps = {
+    onHover?: () => any
+    onLeave?: () => any
+    children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
+const MenuItem = React.forwardRef(function MenuItem(
+    props: MenuItemProps,
+    ref: Ref<HTMLDivElement>
+) {
     const [id, setId] = useState(null);
     const [expanded, setExpanded] = useState(false);
+    const menu = useContext(MenuContext);
 
     useEffect(() => {
         setId(generateId());
     }, []);
-    const menu = useContext(MenuContext);
 
     useEffect(() => {
         if (menu.expandedItem && menu.expandedItem === id && !expanded) {
@@ -22,11 +31,26 @@ function MenuItem(props: { children: any, className?: string, onHover?: () => an
         }
     }, [menu.expandedItem])
 
-    function handleMouseEnter(): void {
+    function handleMouseEnter(event: React.MouseEvent<HTMLDivElement>): void {
         menu.onItemEnter(id);
+        props.onMouseEnter && props.onMouseEnter(event)
     }
 
-    return <div className={props.className} onMouseEnter={handleMouseEnter} onMouseLeave={menu.onItemLeave}>{props.children}</div>;
-}
+    function handleMouseLeave(event: React.MouseEvent<HTMLDivElement>): void {
+        menu.onItemLeave()
+        props.onMouseLeave && props.onMouseLeave(event)
+    }
+
+    return (
+        <div
+            {...props}
+            ref={ref}
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+        >
+            {props.children}
+        </div>
+    );
+})
 
 export default MenuItem;
