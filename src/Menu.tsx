@@ -1,5 +1,6 @@
-import React, { createContext, ReactElement, useRef, useState } from 'react';
+import React, { createContext, HTMLAttributes, ReactNode, Ref, useRef, useState } from 'react';
 import { getMousePosition, getRectangle, getTriangleZone, isInsideTriangle } from './functions';
+import { useForkRef } from './useForkRef'
 
 const state: { pendingExpand: { item: string|null, timeoutId?: any }, mouseHistory: any[]} = {
     pendingExpand: {
@@ -39,9 +40,21 @@ const MOUSE_HISTORY_SIZE = 3;
 
 export const MenuContext = createContext(defaultState);
 
-function Menu (props: { children: any, onMouseLeave?: () => any, className?: string, hoverDelay?: number }): ReactElement {
-    const hoverDelay = props.hoverDelay || DEFAULT_HOVER_DELAY;
+type MenuProps = {
+    hoverDelay?: number
+    children: ReactNode
+} & HTMLAttributes<HTMLDivElement>
+
+const Menu = React.forwardRef(function Menu(
+    {
+        hoverDelay = DEFAULT_HOVER_DELAY,
+        ...props
+    }: MenuProps,
+    ref: Ref<HTMLDivElement>
+) {
     const menuRef = useRef();
+    const forkedRef = useForkRef(menuRef, ref)
+
     const [expandedItem, setExpandedItem] = useState(null);
 
     function updateExpand (): void {
@@ -66,23 +79,25 @@ function Menu (props: { children: any, onMouseLeave?: () => any, className?: str
             timeoutId: setTimeout(() => updateExpand(), hoverDelay + 100)
         };
     }
-    function onMouseMove ({ nativeEvent }): void {
-        state.mouseHistory.push(getMousePosition(nativeEvent));
+    function onMouseMove(event: React.MouseEvent<HTMLDivElement>): void {
+        props.onMouseMove && props.onMouseMove(event);
+        state.mouseHistory.push(getMousePosition(event.nativeEvent));
         if (state.mouseHistory.length > MOUSE_HISTORY_SIZE) {
             state.mouseHistory.shift();
         }
     }
-    function handleMenuLeave (): void {
-        props.onMouseLeave && props.onMouseLeave();
+    function handleMenuLeave (event: React.MouseEvent<HTMLDivElement>): void {
+        props.onMouseLeave && props.onMouseLeave(event);
         clearPendingExpand();
         setExpandedItem(null);
     }
     return (
         <MenuContext.Provider value={{ onItemEnter, onItemLeave, expandedItem }}>
-            <div ref={menuRef} className={props.className} onMouseLeave={handleMenuLeave} onMouseMove={onMouseMove}>
+            <div {...props} ref={forkedRef} onMouseLeave={handleMenuLeave} onMouseMove={onMouseMove}>
                 {props.children}
             </div>
         </MenuContext.Provider>
     );
-}
+})
+
 export default Menu;
