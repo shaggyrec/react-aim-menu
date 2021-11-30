@@ -10,8 +10,12 @@
     "build": "rm -rf lib && tsc",
     "build:parcel": "rm -rf lib && parcel build src/index.tsx --dist-dir lib",
     "test": "npm run lint",
-    "lint": "node_modules/.bin/eslint './src/**/*.tsx' './src/**/*.ts'"
+    "lint": "node_modules/.bin/eslint './src/**/*.tsx' './src/**/*.ts'",
+    "prepublishOnly": "npm run build:parcel"
   },
+  "files": [
+    "lib/"
+  ],
   "keywords": [
     "react",
     "amazon",
