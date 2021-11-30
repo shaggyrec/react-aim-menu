@@ -1,4 +1,5 @@
-import React, { createContext, HTMLAttributes, ReactNode, Ref, useRef, useState } from 'react';
+import React, { forwardRef, createContext, useRef, useState } from 'react';
+import type { HTMLAttributes, ReactNode, Ref } from 'react';
 import { getMousePosition, getRectangle, getTriangleZone, isInsideTriangle } from './functions';
 import { useForkRef } from './useForkRef'
 
@@ -45,15 +46,15 @@ type MenuProps = {
     children: ReactNode
 } & HTMLAttributes<HTMLDivElement>
 
-const Menu = React.forwardRef(function Menu(
+const Menu = forwardRef(function Menu(
     {
         hoverDelay = DEFAULT_HOVER_DELAY,
         ...props
     }: MenuProps,
     ref: Ref<HTMLDivElement>
 ) {
-    const menuRef = useRef();
-    const forkedRef = useForkRef(menuRef, ref)
+    const menuRef = useRef(null);
+    const forkedRef = useForkRef(ref, menuRef)
 
     const [expandedItem, setExpandedItem] = useState(null);
 
@@ -79,6 +80,7 @@ const Menu = React.forwardRef(function Menu(
             timeoutId: setTimeout(() => updateExpand(), hoverDelay + 100)
         };
     }
+
     function onMouseMove(event: React.MouseEvent<HTMLDivElement>): void {
         props.onMouseMove && props.onMouseMove(event);
         state.mouseHistory.push(getMousePosition(event.nativeEvent));
@@ -86,11 +88,13 @@ const Menu = React.forwardRef(function Menu(
             state.mouseHistory.shift();
         }
     }
+
     function handleMenuLeave (event: React.MouseEvent<HTMLDivElement>): void {
         props.onMouseLeave && props.onMouseLeave(event);
         clearPendingExpand();
         setExpandedItem(null);
     }
+
     return (
         <MenuContext.Provider value={{ onItemEnter, onItemLeave, expandedItem }}>
             <div {...props} ref={forkedRef} onMouseLeave={handleMenuLeave} onMouseMove={onMouseMove}>

@@ -3,11 +3,12 @@
   "version": "1.1.0",
   "description": "A React version of Amazon's jQuery-menu-aim plugin",
   "main": "lib/index.js",
+  "module": "lib/module.js",
   "types": "lib/index.d.ts",
   "scripts": {
     "start": "parcel example/index.html",
     "build": "rm -rf lib && tsc",
-    "build:parcel": "rm -rf lib && parcel build src/index.tsx --out-dir lib",
+    "build:parcel": "rm -rf lib && parcel build src/index.tsx --dist-dir lib",
     "test": "npm run lint",
     "lint": "node_modules/.bin/eslint './src/**/*.tsx' './src/**/*.ts'"
   },
@@ -24,6 +25,8 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@parcel/packager-ts": "^2.0.1",
+    "@parcel/transformer-typescript-types": "^2.0.1",
     "@types/node": "^14.14.14",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
@@ -33,7 +36,7 @@
     "eslint-config-typescript": "^3.0.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-react": "^7.21.5",
-    "parcel-bundler": "^1.12.4",
+    "parcel": "^2.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "typescript": "^4.1.3"
